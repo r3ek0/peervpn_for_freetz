@@ -1,0 +1,1 @@
+[ "$EXTERNAL_FREETZ_PACKAGE_PEERVPN" == "y" ] && EXTERNAL_FILES+=" /usr/sbin/peervpn"

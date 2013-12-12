@@ -1,0 +1,28 @@
+#!/bin/sh
+. /mod/etc/conf/peervpn.cfg
+# for testing purpose
+#. ./peervpn.cfg
+
+cat << EOF
+networkname $PEERVPN_NETWORKNAME
+psk $PEERVPN_PSK
+enabletunneling $PEERVPN_ENABLETUNNELING
+initpeers $PEERVPN_INITPEERS
+interface $PEERVPN_INTERFACE
+ifconfig4 $PEERVPN_IFCONFIG4
+ifconfig6 $PEERVPN_IFCONFIG6
+upcmd $PEERVPN_UPCMD
+local $PEERVPN_LOCAL
+port $PEERVPN_PORT
+sockmark $PEERVPN_SOCKMARK
+enableipv4 $PEERVPN_ENABLEIPV4
+enableipv6 $PEERVPN_ENABLEIPV6
+enablendpcache $PEERVPN_ENABLENDPCACHE
+enablerelay $PEERVPN_ENABLERELAY
+engine $PEERVPN_ENGINE
+enableprivdrop $PEERVPN_ENABLEPRIVDROP
+user $PEERVPN_USER
+group $PEERVPN_GROUP
+chroot $PEERVPN_CHROOT
+EOF
+#if [ -n $PEERVPN_INITPEERS ]; then echo "initpeers $PEERVPN_INITPEERS"; fi

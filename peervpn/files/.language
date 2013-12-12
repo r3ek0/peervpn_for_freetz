@@ -1,0 +1,9 @@
+languages
+{ de en }
+default
+{ en }
+files
+{
+    etc/init.d/rc.peervpn
+    usr/lib/cgi-bin/peervpn.cgi
+}

@@ -1,0 +1,11 @@
+config FREETZ_PACKAGE_PEERVPN
+	bool "Peervpn 0-036 (binary only)"
+	default n
+	select FREETZ_LIB_libcrypto 
+	select FREETZ_LIB_libssl 
+	select FREETZ_LIB_libz 
+	help
+		A virtual network built by PeerVPN uses a full mesh topology. 
+		All nodes talk directly to each other, there is no need for a central server. 
+		If one node goes down, the rest of the network is unaffected.
+

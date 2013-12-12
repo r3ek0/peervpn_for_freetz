@@ -1,0 +1,59 @@
+#!/bin/sh
+
+DAEMON=peervpn
+DAEMON_BIN=peervpn
+DAEMON_CHECK="peervpn"
+DAEMON_LONG_NAME="Peervpn"
+. /etc/init.d/modlibrc
+
+
+config() {
+	modlib_config
+}
+
+start() {
+	# peervpn has a problem here
+	modlib_startdaemon $DAEMON_BIN /mod/etc/$DAEMON.conf 
+}
+
+stop() {
+	kill `pidof $DAEMON_BIN`
+	for x in 1 2 3 4 5 6 7 8 9; do
+		pidof $DAEMON_BIN >/dev/null || break
+		sleep 1
+	done
+}
+
+case $1 in
+	""|load)
+		modreg cgi $DAEMON "$DAEMON_LONG_NAME"
+		modreg daemon $DAEMON
+		modlib_add_user_and_group $DAEMON_BIN
+		modlib_start $PEERVPN_ENABLED
+		;;
+	unload)
+		modunreg daemon $DAEMON
+		modunreg cgi $DAEMON
+		modunreg file $DAEMON
+
+		modlib_stop
+		;;
+	start)
+		modlib_start
+		;;
+	stop)
+		modlib_stop
+		;;
+	restart)
+		modlib_restart
+		;;
+	status)
+		modlib_status
+		;;
+	*)
+		echo "Usage: $0 [load|unload|start|stop|restart|status]" 1>&2
+		exit 1
+		;;
+esac
+
+exit 0
