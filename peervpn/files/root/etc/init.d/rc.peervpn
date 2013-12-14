@@ -12,8 +12,9 @@ config() {
 }
 
 start() {
-	# peervpn has a problem here
-	modlib_startdaemon $DAEMON_BIN /mod/etc/$DAEMON.conf 
+	# peervpn does not fork. 
+	# we have to use the "&" operator to send proc to bg
+	modlib_startdaemon /mod/etc/default.peervpn/peervpn_starter.sh 
 }
 
 stop() {
